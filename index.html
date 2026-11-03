@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="uz" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMPEROR AI — Next-Gen AI Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        aiPurple: '#7C3AED',
+                        aiPink: '#EC4899',
+                        aiDark: '#0B0F19',
+                        aiCard: 'rgba(23, 31, 51, 0.7)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0B0F19;
+            color: #F3F4F6;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass {
+            background: rgba(23, 31, 51, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glow-purple {
+            box-shadow: 0 0 50px -10px rgba(124, 58, 237, 0.4);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 glass border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center text-xl font-black shadow-lg">
+                    ⚡️
+                </div>
+                <span class="text-xl font-black tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">EMPEROR AI</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-300">
+                <button onclick="switchTab('chat')" class="hover:text-purple-400 transition">💬 AI Chat</button>
+                <button onclick="switchTab('image')" class="hover:text-purple-400 transition">🎨 Image Gen</button>
+                <button onclick="switchTab('history')" class="hover:text-purple-400 transition">📜 Tarix</button>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="glass px-4 py-1.5 rounded-full text-xs font-bold border border-purple-500/30 text-purple-300">
+                    ⚡️ 100 Kredit
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN APP CONTAINER -->
+    <main class="max-w-5xl mx-auto px-4 py-8 flex-1 w-full">
+
+        <!-- AI CHAT TAB -->
+        <div id="chatTab" class="space-y-6">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
+                <h1 class="text-4xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400">
+                    Nimani yaratamiz?
+                </h1>
+                <p class="text-gray-400 text-sm">Sun'iy intellekt bilan istalgan savolingizga javob oling yoki g'oyalaringizni shakllantiring.</p>
+            </div>
+
+            <div class="glass rounded-3xl p-6 h-[450px] overflow-y-auto space-y-4 glow-purple" id="chatBox">
+                <div class="flex gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-purple-600 flex items-center justify-center text-sm font-bold">AI</div>
+                    <div class="bg-gray-800/80 p-4 rounded-2xl max-w-lg text-sm leading-relaxed border border-gray-700">
+                        Salom! Men EMPEROR AI yordamchisiman. Bugun sizga qanday yordam bera olaman?
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAT INPUT -->
+            <div class="relative flex items-center">
+                <input type="text" id="userInput" placeholder="AI'ga savol bering yoki topshiriq yozing..." 
+                    class="w-full glass py-4 pl-6 pr-16 rounded-2xl text-sm focus:outline-none focus:border-purple-500 transition text-white placeholder-gray-500">
+                <button onclick="sendMessage()" class="absolute right-3 bg-gradient-to-r from-purple-600 to-pink-600 px-5 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition shadow-lg">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="glass border-t border-gray-800 py-4 text-center text-xs text-gray-500">
+        © 2026 EMPEROR AI Studio. Barcha huquqlarhimoyalangan.
+    </footer>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const box = document.getElementById('chatBox');
+            if(!input.value.trim()) return;
+
+            // User Message
+            box.innerHTML += `
+                <div class="flex gap-3 justify-end">
+                    <div class="bg-purple-600 p-4 rounded-2xl max-w-lg text-sm leading-relaxed text-white">
+                        ${input.value}
+                    </div>
+                </div>
+            `;
+
+            const query = input.value;
+            input.value = '';
+            box.scrollTop = box.scrollHeight;
+
+            // Simulated AI Response
+            setTimeout(() => {
+                box.innerHTML += `
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-purple-600 flex items-center justify-center text-sm font-bold">AI</div>
+                        <div class="bg-gray-800/80 p-4 rounded-2xl max-w-lg text-sm leading-relaxed border border-gray-700">
+                            Sizning kiritganingiz: "${query}". Bu funksiyani real API bilan bog'lashga tayyormiz! 🚀
+                        </div>
+                    </div>
+                `;
+                box.scrollTop = box.scrollHeight;
+            }, 800);
+        }
+    </script>
+</body>
+</html>
